@@ -53,7 +53,7 @@ public class CaptureService {
             Optional.of("The worker [" + Thread.currentThread().getName() + "] is working...")
                     .ifPresent(System.out::println);
             try {
-                Thread.sleep(10000);
+                Thread.sleep(10000);//todo 模拟执行任务
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

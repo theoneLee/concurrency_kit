@@ -19,7 +19,7 @@ public class ProduceConsumerVersion1 {
     }
 
     /**
-     * 这个会导致生产者线程生产的内容，消费者线程重复消费同一个内容，并且生产者会无止境的生产除非抢占不到锁
+     * 这个会导致生产者线程生产的内容，消费者线程重复消费同一个内容；并且生产者会无止境的生产除非抢占不到锁，而消费者会不停的重复消费同一个内容除非抢占不到锁
      * @param args
      */
     public static void main(String[] args) {

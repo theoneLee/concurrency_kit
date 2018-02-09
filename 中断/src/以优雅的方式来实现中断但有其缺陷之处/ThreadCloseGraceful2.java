@@ -1,19 +1,17 @@
-package 以优雅的方式来实现终端但有其缺陷之处;
+package 以优雅的方式来实现中断但有其缺陷之处;
 
-public class ThreadCloseGraceful {
-
+public class ThreadCloseGraceful2 {
     private static class Worker extends Thread {
-        private volatile boolean start = true;
 
         @Override
         public void run() {
-            while (start) {
-                //
+            while (true) {
+                if (Thread.interrupted())
+                    break;
             }
-        }
-
-        public void shutdown() {
-            this.start = false;
+            //-------------
+            //-------------
+            //-------------
         }
     }
 
@@ -22,11 +20,11 @@ public class ThreadCloseGraceful {
         worker.start();
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        worker.shutdown();
+        worker.interrupt();
     }
 }

@@ -15,7 +15,7 @@ public class CaptureService {
 
         List<Thread> worker = new ArrayList<>();
         Arrays.asList("M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10").stream()
-                .map(CaptureService::createCaptureThread)
+                .map(CaptureService::createCaptureThread)//函数推导，将字符串队列转化为Thread队列
                 .forEach(t -> {
                     t.start();
                     worker.add(t);
@@ -37,7 +37,7 @@ public class CaptureService {
         return new Thread(() -> {
             Optional.of("The worker [" + Thread.currentThread().getName() + "] BEGIN capture data.")
                     .ifPresent(System.out::println);
-            synchronized (CONTROLS) {
+            synchronized (CONTROLS) {//若超过可执行任务数量，就让其进入waiting状态；否则就加入任务队列
                 while (CONTROLS.size() > MAX_WORKER) {
                     try {
                         CONTROLS.wait();

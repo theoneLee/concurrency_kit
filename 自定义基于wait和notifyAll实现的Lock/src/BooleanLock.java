@@ -44,7 +44,9 @@ public class BooleanLock implements Lock {
         while (initValue) {
             if (hasRemaining <= 0)
                 throw new TimeOutException("Time out");
-            blockedThreadCollection.add(Thread.currentThread());
+            if (!blockedThreadCollection.contains(Thread.currentThread())){
+                blockedThreadCollection.add(Thread.currentThread());
+            }
             this.wait(mills);
 //            this.wait();
             hasRemaining = endTime - System.currentTimeMillis();
